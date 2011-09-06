@@ -29,6 +29,15 @@ When it refers to "this file" it is referring to that file.
 ;; deeply enough into Clojure territory for them to proceed in other directions
 ;; on their own.
 
+;; More specifically, we begin with simple expressions for arithmetic and list
+;; manipulation, introduce facilities for defining functions and macros, and give
+;; progressively more complex examples of definitions that involve many of
+;; Clojure's data structures including lists, vectors, maps, and sets. Among the
+;; applications used for examples and problem sets are grammar-driven text
+;; generation, genetic programming, and simple graphics. We also demonstrate
+;; alternatives for defining iterative and recursive algorithms and briefly touch
+;; upon topics ranging from debugging and profiling to file I/O and concurrency. 
+
 ;; Many things are introduced here without explanation. My suggestion is that 
 ;; you observe the output that is provided here, look things up in online resources 
 ;; and in documentation that may be available in your Clojure environment, and, 
@@ -46,6 +55,7 @@ When it refers to "this file" it is referring to that file.
 ;; http://4clojure.com
 ;; http://clojuredocs.org
 ;; http://www.clojure-toolbox.com
+;; http://clojuresphere.herokuapp.com/
 ;; http://www.clojureatlas.com
 ;; http://alexott.net/en/clojure/video.html
 ;; http://planet.clojure.in/
