@@ -1,7 +1,7 @@
 ;; clojinc
 ;; Steps toward clojure, starting from zero.
 ;; by Lee Spector <lspector@hampshire.edu>, 2011
-;; Version (date): 20110831
+;; Version (date): 20110906
 
 ;; This file is a saved, re-executable Clojure REPL (Read Eval Print Loop) 
 ;; session, with minimal comments and occasional problem sets. It is intended
