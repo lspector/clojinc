@@ -1,7 +1,7 @@
 ;; clojinc
 ;; Steps toward clojure, starting from zero.
-;; by Lee Spector <lspector@hampshire.edu>, 2011
-;; Version (date): 20110906
+;; by Lee Spector <lspector@hampshire.edu>, 2011-2012
+;; Version (date): 20120825
 
 ;; This file is a saved, re-executable Clojure REPL (Read Eval Print Loop) 
 ;; session, with minimal comments and occasional problem sets. It is intended
@@ -46,26 +46,25 @@
 ;; Potentially useful online resources include:
 
 ;; http://clojure.org
+;; http://dev.clojure.org/display/doc/Getting+Started
 ;; http://groups.google.com/group/clojure
-;; http://richhickey.github.com/clojure/
 ;; http://4clojure.com
 ;; http://clojuredocs.org
 ;; http://www.clojure-toolbox.com
-;; http://clojuresphere.herokuapp.com/
 ;; http://www.clojureatlas.com
 ;; http://alexott.net/en/clojure/video.html
 ;; http://planet.clojure.in/
 
-;; This file was created in the free clooj Clojure IDE, which is available from: 
-;;   https://github.com/arthuredelstein/clooj
-;; It was created using clojure version 1.2.1 and clojure-contrib (a standard set 
-;; of Clojure libraries) version 1.2.0.
+;; Most of the outputs in clojinc were created using clojure version 1.3 in a
+;; REPL started with Leiningen 1.7.1 (https://github.com/technomancy/leiningen)
+;; and using Java 1.6.0_33. (A few were left from an earlier version, for which
+;; Clooj (https://github.com/arthuredelstein/clooj) was used.
 
 
 
 ;; create the namespace within which we'll work
 
-(ns clojinc.core)  
+(ns clojinc.core)
 
 ; nil
 
@@ -109,7 +108,7 @@
 
 +
 
-; #<core$_PLUS_ clojure.core$_PLUS_@48825969>
+; #<core$_PLUS_ clojure.core$_PLUS_@50903025>
 
 
 
@@ -164,41 +163,41 @@
 
 (/ 23 0) ;; nope
 
-; #<CompilerException java.lang.ArithmeticException: Divide by zero (NO_SOURCE_FILE:0)>
+; ArithmeticException Divide by zero  clojure.lang.Numbers.divide (Numbers.java:156)
 
 
 
 (* 123456789 987654321 999999999 12345678987654321)
 
-; 1505341120331325629973976373036705875152651
+; ArithmeticException integer overflow  clojure.lang.Numbers.throwIntOverflow (Numbers.java:1374)
+
+
+
+(* 123456789M 987654321 999999999 12345678987654321)
+
+; 1505341120331325629973976373036705875152651M
 
 
 
 (sqrt (* 2 2 2 2))
 
-; #<CompilerException java.lang.Exception: Unable to resolve symbol: sqrt in this context (NO_SOURCE_FILE:63)>
+; CompilerException java.lang.RuntimeException: Unable to resolve symbol: sqrt in this context, compiling:(NO_SOURCE_PATH:12) 
 
 
 
-(use 'clojure.contrib.math)
+(Math/sqrt (* 2 2 2 2))  ;; from java.lang.Math
 
-; nil
-
-
-
-(sqrt (* 2 2 2 2))
-
-; 4
+; 4.0
 
 
 
-(sqrt -4) ;; nope
+(Math/sqrt -4) ;; nope
 
 ; NaN
 
 
 
-(Math/log 2)  ;; from java.lang.Math
+(Math/log 2)
 
 ; 0.6931471805599453
 
@@ -242,9 +241,8 @@ my-favorite-number
 
 (inspect my-favorite-number)
 
-; < window opens >
-; #<JFrame javax.swing.JFrame[frame2,0,22,400x400,invalid,layout=java.awt.BorderLayout,title=Clojure Inspector,resizable,normal,defaultCloseOperation=HIDE_ON_CLOSE,rootPane=javax.swing.JRootPane[,0,22,400x378,invalid,layout=javax.swing.JRootPane$RootLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777673,maximumSize=,minimumSize=,preferredSize=],rootPaneCheckingEnabled=true]>
-
+; < window opens in the clojure.main application>
+; #<JFrame javax.swing.JFrame[frame0,0,22,400x400,invalid,layout=java.awt.BorderLayout,title=Clojure Inspector,resizable,normal,defaultCloseOperation=HIDE_ON_CLOSE,rootPane=javax.swing.JRootPane[,0,22,400x378,invalid,layout=javax.swing.JRootPane$RootLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777673,maximumSize=,minimumSize=,preferredSize=],rootPaneCheckingEnabled=true]>
 
 
 ;; Problem Set 1: 
@@ -258,7 +256,7 @@ my-favorite-number
 
 woof
 
-; #<CompilerException java.lang.Exception: Unable to resolve symbol: woof in this context (NO_SOURCE_FILE:0)>
+; CompilerException java.lang.RuntimeException: Unable to resolve symbol: woof in this context, compiling:(NO_SOURCE_PATH:0) 
 
 
 
@@ -333,8 +331,8 @@ my-favorite-list
                   lies
                   truth)))
 
-; < window opens >
-; #<JFrame javax.swing.JFrame[frame2,0,22,400x600,layout=java.awt.BorderLayout,title=Clojure Inspector,resizable,normal,defaultCloseOperation=HIDE_ON_CLOSE,rootPane=javax.swing.JRootPane[,0,22,400x578,layout=javax.swing.JRootPane$RootLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777673,maximumSize=,minimumSize=,preferredSize=],rootPaneCheckingEnabled=true]>
+; < window opens in the clojure.main application >
+; #<JFrame javax.swing.JFrame[frame0,0,22,400x600,invalid,layout=java.awt.BorderLayout,title=Clojure Inspector,resizable,normal,defaultCloseOperation=HIDE_ON_CLOSE,rootPane=javax.swing.JRootPane[,0,22,400x578,invalid,layout=javax.swing.JRootPane$RootLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777673,maximumSize=,minimumSize=,preferredSize=],rootPaneCheckingEnabled=true]>
 
 
 
@@ -458,7 +456,7 @@ some other stuff."
 
 (def y 5)
 
-; #'clojinc.core/y
+; (def y 5)
 
 
 
@@ -491,6 +489,12 @@ some other stuff."
 (add-20 15)
 
 ; 35
+
+
+
+(use 'clojure.repl) ;; need to do this to have access to the "doc" function below
+
+; nil
 
 
 
@@ -640,16 +644,7 @@ some other stuff."
 (let [my-sentence (sentence)]
   (concat my-sentence (reverse my-sentence)))
 
-; (the
-;  pineapple
-;  acquired
-;  a
-;  pedestrian
-;  pedestrian
-;  a
-;  acquired
-;  pineapple
-;  the)
+; (the pineapple acquired a pedestrian pedestrian a acquired pineapple the)
 
 
 
@@ -660,43 +655,7 @@ some other stuff."
     my-sentence '(and you said finally that) 
     your-sentence))
 
-; (I
-;  said
-;  that
-;  the
-;  steamboat
-;  liked
-;  a
-;  steamboat
-;  and
-;  you
-;  said
-;  that
-;  a
-;  walrus
-;  loathed
-;  the
-;  steamboat
-;  to
-;  which
-;  I
-;  replied
-;  that
-;  the
-;  steamboat
-;  liked
-;  a
-;  steamboat
-;  and
-;  you
-;  said
-;  finally
-;  that
-;  a
-;  walrus
-;  loathed
-;  the
-;  steamboat)
+; (I said that the steamboat liked a steamboat and you said that a walrus loathed the steamboat to which I replied that the steamboat liked a steamboat and you said finally that a walrus loathed the steamboat)
 
 
 
@@ -794,6 +753,12 @@ some other stuff."
 
 
 
+(use 'clojure.set)
+
+; nil
+
+
+
 (select even? #{9 3 4 1 11 8})
 
 ; #{4 8}
@@ -874,12 +839,6 @@ some other stuff."
 (member? \6 (set (str 2315)))
 
 ; false
-
-
-
-(use 'clojure.set)
-
-; nil
 
 
 
@@ -979,7 +938,7 @@ some other stuff."
 
 (time (dotimes [i 1000000] (/ i 23)))
 
-; "Elapsed time: 110.359 msecs"
+; "Elapsed time: 809.623 msecs"
 ; nil
 
 
@@ -1057,14 +1016,14 @@ some other stuff."
 
 (time (slowmult 5 5))
 
-; "Elapsed time: 931.633 msecs"
+; "Elapsed time: 182.648 msecs"
 ; 25
 
 
 
 (time (doall (map #(slowmult % 2) (range 10))))
 
-; "Elapsed time: 9329.36 msecs"
+; "Elapsed time: 1143.98 msecs"
 ; (0 2 4 6 8 10 12 14 16 18)
 
 
@@ -1073,7 +1032,7 @@ some other stuff."
 
 (time (doall (pmap #(slowmult % 2) (range 10))))
 
-; "Elapsed time: 7472.168 msecs"
+; "Elapsed time: 469.409 msecs"
 ; (0 2 4 6 8 10 12 14 16 18)
 
 
@@ -1121,7 +1080,7 @@ some other stuff."
 
 [a b c d]
 
-; #<CompilerException java.lang.Exception: Unable to resolve symbol: a in this context (NO_SOURCE_FILE:0)>
+; CompilerException java.lang.RuntimeException: Unable to resolve symbol: a in this context, compiling:(NO_SOURCE_PATH:0) 
 
 
 
@@ -1221,14 +1180,14 @@ some other stuff."
 
 (time (nth longlist 9000))
 
-; "Elapsed time: 0.502 msecs"
+; "Elapsed time: 0.559 msecs"
 ; 999
 
 
 
 (time (nth longvec 9000))
 
-; "Elapsed time: 0.031 msecs"
+; "Elapsed time: 0.036 msecs"
 ; 9000
 
 
@@ -1281,7 +1240,7 @@ some other stuff."
 
 (sandwich 'pastrami 'cheese)
 
-#<CompilerException java.lang.IllegalArgumentException: Wrong number of args (2) passed to: core$sandwich (NO_SOURCE_FILE:0)>
+; ArityException Wrong number of args (2) passed to: core$sandwich  clojure.lang.AFn.throwArity (AFn.java:437)
 
 
 
@@ -1401,45 +1360,32 @@ some other stuff."
 
 (assoc eddie :died 1849)
 
-; {:died 1849,
-;  :name "Edgar Allen Poe",
-;  :born 1809,
-;  :birthplace "Boston, MA",
-;  :residence "Baltimore, MD"}
+; {:birthplace "Boston, MA", :name "Edgar Allen Poe", :died 1849, :residence "Baltimore, MD", :born 1809}
 
 
 
 eddie
 
-; {:name "Edgar Allen Poe",
-;  :born 1809,
-;  :birthplace "Boston, MA",
-;  :residence "Baltimore, MD"}
+; {:birthplace "Boston, MA", :name "Edgar Allen Poe", :residence "Baltimore, MD", :born 1809}
 
 
 
 (inspect eddie)
 
 ; < window opens >
-; #<JFrame javax.swing.JFrame[frame6,0,22,400x400,layout=java.awt.BorderLayout,title=Clojure Inspector,resizable,normal,defaultCloseOperation=HIDE_ON_CLOSE,rootPane=javax.swing.JRootPane[,0,22,400x378,layout=javax.swing.JRootPane$RootLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777673,maximumSize=,minimumSize=,preferredSize=],rootPaneCheckingEnabled=true]>
+; #<JFrame javax.swing.JFrame[frame1,0,22,400x400,invalid,layout=java.awt.BorderLayout,title=Clojure Inspector,resizable,normal,defaultCloseOperation=HIDE_ON_CLOSE,rootPane=javax.swing.JRootPane[,0,22,400x378,invalid,layout=javax.swing.JRootPane$RootLayout,alignmentX=0.0,alignmentY=0.0,border=,flags=16777673,maximumSize=,minimumSize=,preferredSize=],rootPaneCheckingEnabled=true]>
 
 
 
 (merge eddie {:wife "Virginia Clemm"})
 
-; {:wife "Virginia Clemm",
-;  :name "Edgar Allen Poe",
-;  :born 1809,
-;  :birthplace "Boston, MA",
-;  :residence "Baltimore, MD"}
+; {:birthplace "Boston, MA", :wife "Virginia Clemm", :name "Edgar Allen Poe", :residence "Baltimore, MD", :born 1809}
 
 
 
 (dissoc eddie :born)
 
-; {:name "Edgar Allen Poe",
-;  :birthplace "Boston, MA",
-;  :residence "Baltimore, MD"}
+; {:birthplace "Boston, MA", :name "Edgar Allen Poe", :residence "Baltimore, MD"}
 
 
 
@@ -1483,10 +1429,7 @@ eddie
     (dissoc :born)
     (dissoc :birthplace))
 
-; {:wife "Virginia Clemm",
-;  :died 1849,
-;  :name "Edgar Allen Poe",
-;  :residence "Baltimore, MD"}
+; {:wife "Virginia Clemm", :name "Edgar Allen Poe", :died 1849, :residence "Baltimore, MD"}
 
 
 
@@ -1563,21 +1506,7 @@ eddie
 
 (generate :sentence)
 
-; (the
-;  awesome
-;  green
-;  columnist
-;  on
-;  he
-;  confounded
-;  a
-;  awesome
-;  little
-;  blue
-;  awesome
-;  columnist
-;  in
-;  she)
+; (the  awesome green columnist on he confounded a awesome little blue awesome columnist in she)
 
 
 
@@ -1691,7 +1620,7 @@ eddie
 
 X
 
-; #<Atom@20a0726e: 0>
+; #<Atom@612438f1: 0>
 
 
 
@@ -1829,7 +1758,7 @@ X
 
 (buckets-needed [3 2 4 1 2 3] 16)
 
-; #<CompilerException java.lang.NullPointerException (NO_SOURCE_FILE:0)>
+; NullPointerException   clojure.lang.Numbers.ops (Numbers.java:942)
 
 
 
@@ -2102,53 +2031,41 @@ X
 
 (increment-unluckily '(1 2 3 4 Quagmire))
     
-; (14#<ClassCastException java.lang.ClassCastException: clojure.lang.Symbol cannot be cast to java.lang.Number>
+; (14 15 16 ClassCastException clojure.lang.Symbol cannot be cast to java.lang.Number  clojure.lang.Numbers.add (Numbers.java:126)
 
 
 
 (.printStackTrace *e)
 
-; java.lang.RuntimeException: java.lang.RuntimeException: java.lang.ClassCastException: clojure.lang.Symbol cannot be cast to java.lang.Number
-; 	at clojure.lang.LazySeq.sval(LazySeq.java:47)
-; 	at clojure.lang.LazySeq.seq(LazySeq.java:56)
-; 	at clojure.lang.RT.seq(RT.java:450)
-; 	at clojure.core$seq.invoke(core.clj:122)
-; 	at clojure.core$dorun.invoke(core.clj:2450)
-; 	at clooj.repl$create_clojure_repl$repl_thread_fn__452$fn__455.doInvoke(repl.clj:79)
-; 	at clojure.lang.RestFn.invoke(RestFn.java:408)
-; 	at clojure.main$repl$read_eval_print__5632.invoke(main.clj:184)
-; 	at clojure.main$repl$fn__5637.invoke(main.clj:204)
-; 	at clojure.main$repl.doInvoke(main.clj:204)
-; 	at clojure.lang.RestFn.invoke(RestFn.java:1523)
-; 	at clooj.repl$create_clojure_repl$repl_thread_fn__452.invoke(repl.clj:104)
-; 	at clojure.lang.AFn.run(AFn.java:24)
-; 	at java.lang.Thread.run(Thread.java:680)
-; Caused by: java.lang.RuntimeException: java.lang.ClassCastException: clojure.lang.Symbol cannot be cast to java.lang.Number
-; 	at clojure.lang.LazySeq.sval(LazySeq.java:47)
-; 	at clojure.lang.LazySeq.seq(LazySeq.java:56)
-; 	at clojure.lang.Cons.next(Cons.java:39)
-; 	at clojure.lang.RT.next(RT.java:560)
-; 	at clojure.core$next.invoke(core.clj:61)
-; 	at clojure.pprint$pprint_simple_list$fn__7146.invoke(dispatch.clj:71)
-; 	at clojure.pprint$pprint_simple_list.invoke(dispatch.clj:67)
-; 	at clojure.pprint$pprint_list.invoke(dispatch.clj:78)
-; 	at clojure.lang.MultiFn.invoke(MultiFn.java:163)
-; 	at clojure.pprint$write_out.invoke(pprint_base.clj:194)
-; 	at clojure.pprint$pprint$fn__6570.invoke(pprint_base.clj:250)
-; 	at clojure.pprint$pprint.invoke(pprint_base.clj:248)
-; 	at clojure.pprint$pprint.invoke(pprint_base.clj:245)
-; 	at clooj.repl$repl_print.invoke(repl.clj:39)
-; 	at clojure.core$map$fn__3699.invoke(core.clj:2096)
-; 	at clojure.lang.LazySeq.sval(LazySeq.java:42)
-; 	... 13 more
-; Caused by: java.lang.ClassCastException: clojure.lang.Symbol cannot be cast to java.lang.Number
-; 	at clojure.lang.Numbers.add(Numbers.java:123)
-; 	at clojinc.core$add13.invoke(NO_SOURCE_FILE:1320)
-; 	at clojure.core$map$fn__3699.invoke(core.clj:2096)
-; 	at clojure.lang.LazySeq.sval(LazySeq.java:42)
-; 	... 28 more
 ; nil
-
+; clojinc.core=> java.lang.ClassCastException: clojure.lang.Symbol cannot be cast to java.lang.Number
+; 	at clojure.lang.Numbers.add(Numbers.java:126)
+;	at clojure.lang.Numbers.add(Numbers.java:3513)
+;	at clojinc.core$add13.invoke(NO_SOURCE_FILE:435)
+;	at clojure.core$map$fn__3811.invoke(core.clj:2432)
+;	at clojure.lang.LazySeq.sval(LazySeq.java:42)
+;	at clojure.lang.LazySeq.seq(LazySeq.java:60)
+;	at clojure.lang.Cons.next(Cons.java:39)
+;	at clojure.lang.RT.next(RT.java:580)
+;	at clojure.core$next.invoke(core.clj:64)
+;	at clojure.core$nthnext.invoke(core.clj:2752)
+;	at clojure.core$print_sequential.invoke(core_print.clj:57)
+;	at clojure.core$fn__4990.invoke(core_print.clj:140)
+;	at clojure.lang.MultiFn.invoke(MultiFn.java:167)
+;	at clojure.core$pr_on.invoke(core.clj:3264)
+;	at clojure.core$pr.invoke(core.clj:3276)
+;	at clojure.lang.AFn.applyToHelper(AFn.java:161)
+;	at clojure.lang.RestFn.applyTo(RestFn.java:132)
+;	at clojure.core$apply.invoke(core.clj:600)
+;	at clojure.core$prn.doInvoke(core.clj:3309)
+;	at clojure.lang.RestFn.invoke(RestFn.java:408)
+;	at clojure.main$repl$read_eval_print__5967.invoke(main.clj:245)
+;	at clojure.main$repl$fn__5972.invoke(main.clj:265)
+;	at clojure.main$repl.doInvoke(main.clj:265)
+;	at clojure.lang.RestFn.invoke(RestFn.java:512)
+;	at user$eval27$acc__3261__auto____30$fn__32.invoke(NO_SOURCE_FILE:1)
+;	at clojure.lang.AFn.run(AFn.java:24)
+;	at java.lang.Thread.run(Thread.java:680)
 
 
 (System/getProperty "user.name")  ;; a call to a static method of the System class
@@ -2159,7 +2076,7 @@ X
 
 (System/currentTimeMillis)
 
-; 1314241024373
+; 1346173749285
 
 
 
@@ -2228,7 +2145,7 @@ X
       (.setVisible true))
     jp))
 
-; < a window appears >
+; < a window appears in the clojure.main application >
 ; #'clojinc.core/panel
 
 
@@ -2303,7 +2220,23 @@ X
 
 (factorial 100)
 
-; 93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000
+; ArithmeticException integer overflow  clojure.lang.Numbers.throwIntOverflow (Numbers.java:1374)
+
+
+
+(defn factorial
+  [n]
+  (loop [i 1 result 1]
+    (if (> i n)
+      result
+      (recur (inc i) (*' result i)))))
+
+; #'clojinc.core/factorial
+
+
+
+(factorial 100)
+; 93326215443944152681699238856266700490715968264381621468592963895217599993229915608941463976156518286253697920827223758251185210916864000000000000000000000000N
 
 
 
@@ -2497,14 +2430,7 @@ X
      (= x y) (concat (list x) '(is equal to) (list y))
      :else (concat (list x) '(is greater than) (list y))))
 
-; (if
-;  (< x y)
-;  (concat (list x) '(is smaller than) (list y))
-;  (clojure.core/cond
-;   (= x y)
-;   (concat (list x) '(is equal to) (list y))
-;   :else
-;   (concat (list x) '(is greater than) (list y))))
+; (if (< x y) (concat (list x) (quote (is smaller than)) (list y)) (clojure.core/cond (= x y) (concat (list x) (quote (is equal to)) (list y)) :else (concat (list x) (quote (is greater than)) (list y))))
 
 
 
@@ -2567,13 +2493,7 @@ X
 
 (macroexpand-1 '(arithmetic-if 1 2 3 4 5))
 
-; (clojure.core/cond
-;  (clojure.core/< 1 2)
-;  3
-;  (clojure.core/= 1 2)
-;  4
-;  :else
-;  5)
+; (if (clojure.core/< 1 2) 3 (clojure.core/cond (clojure.core/= 1 2) 4 :else 5))
 
 
 
@@ -2597,14 +2517,7 @@ X
 
 (macroexpand '(dotimes [_ 4] (println (rand))))
 
-; (let*
-;  [n__3828__auto__ (clojure.core/int 4)]
-;  (clojure.core/loop
-;   [_ (clojure.core/int 0)]
-;   (clojure.core/when
-;    (clojure.core/< _ n__3828__auto__)
-;    (println (rand))
-;    (recur (clojure.core/unchecked-inc _)))))
+; (let* [n__3944__auto__ (clojure.core/long 4)] (clojure.core/loop [_ 0] (clojure.core/when (clojure.core/< _ n__3944__auto__) (println (rand)) (recur (clojure.core/unchecked-inc _)))))
 
 
 
@@ -2721,7 +2634,7 @@ teens
 
 
 
-(require '[clojure.contrib.string :as string])
+(require '[clojure.string :as string])
 
 ; nil
 
@@ -2729,46 +2642,7 @@ teens
  
 (string/split-lines (slurp "/Users/leespector/Code/clojure/clojinc/Jabberwocky.txt"))
 
-; ("JABBERWOCKY by Lewis Carroll"
-;  "(from Through the Looking-Glass and What Alice Found There, 1872) "
-;  ""
-;  ""
-;  "`Twas brillig, and the slithy toves"
-;  "  Did gyre and gimble in the wabe:"
-;  "All mimsy were the borogoves,"
-;  "  And the mome raths outgrabe."
-;  ""
-;  ""
-;  "\"Beware the Jabberwock, my son!"
-;  "  The jaws that bite, the claws that catch!"
-;  "Beware the Jubjub bird, and shun"
-;  "  The frumious Bandersnatch!\""
-;  ""
-;  "He took his vorpal sword in hand:"
-;  "  Long time the manxome foe he sought --"
-;  "So rested he by the Tumtum tree,"
-;  "  And stood awhile in thought."
-;  ""
-;  "And, as in uffish thought he stood,"
-;  "  The Jabberwock, with eyes of flame,"
-;  "Came whiffling through the tulgey wood,"
-;  "  And burbled as it came!"
-;  ""
-;  "One, two! One, two! And through and through"
-;  "  The vorpal blade went snicker-snack!"
-;  "He left it dead, and with its head"
-;  "  He went galumphing back."
-;  ""
-;  "\"And, has thou slain the Jabberwock?"
-;  "  Come to my arms, my beamish boy!"
-;  "O frabjous day! Callooh! Callay!'"
-;  "  He chortled in his joy."
-;  ""
-;  ""
-;  "`Twas brillig, and the slithy toves"
-;  "  Did gyre and gimble in the wabe;"
-;  "All mimsy were the borogoves,"
-;  "  And the mome raths outgrabe. ")
+; ["JABBERWOCKY by Lewis Carroll" "(from Through the Looking-Glass and What Alice Found There, 1872) " "" "" "`Twas brillig, and the slithy toves" "  Did gyre and gimble in the wabe:" "All mimsy were the borogoves," "  And the mome raths outgrabe." "" "" "\"Beware the Jabberwock, my son!" "  The jaws that bite, the claws that catch!" "Beware the Jubjub bird, and shun" "  The frumious Bandersnatch!\"" "" "He took his vorpal sword in hand:" "  Long time the manxome foe he sought --" "So rested he by the Tumtum tree," "  And stood awhile in thought." "" "And, as in uffish thought he stood," "  The Jabberwock, with eyes of flame," "Came whiffling through the tulgey wood," "  And burbled as it came!" "" "One, two! One, two! And through and through" "  The vorpal blade went snicker-snack!" "He left it dead, and with its head" "  He went galumphing back." "" "\"And, has thou slain the Jabberwock?" "  Come to my arms, my beamish boy!" "O frabjous day! Callooh! Callay!'" "  He chortled in his joy." "" "" "`Twas brillig, and the slithy toves" "  Did gyre and gimble in the wabe;" "All mimsy were the borogoves," "  And the mome raths outgrabe. "]
 
 
 
@@ -2857,6 +2731,8 @@ teens
 (slurp (file* "Jabberwocky.txt"))
 
 ; "JABBERWOCKY by Lewis Carroll\n(from Through the Looking-Glass and What Alice Found There, 1872) \n\n\n`Twas brillig, and the slithy toves\n  Did gyre and gimble in the wabe:\nAll mimsy were the borogoves,\n  And the mome raths outgrabe.\n\n\n\"Beware the Jabberwock, my son!\n  The jaws that bite, the claws that catch!\nBeware the Jubjub bird, and shun\n  The frumious Bandersnatch!\"\n\nHe took his vorpal sword in hand:\n  Long time the manxome foe he sought --\nSo rested he by the Tumtum tree,\n  And stood awhile in thought.\n\nAnd, as in uffish thought he stood,\n  The Jabberwock, with eyes of flame,\nCame whiffling through the tulgey wood,\n  And burbled as it came!\n\nOne, two! One, two! And through and through\n  The vorpal blade went snicker-snack!\nHe left it dead, and with its head\n  He went galumphing back.\n\n\"And, has thou slain the Jabberwock?\n  Come to my arms, my beamish boy!\nO frabjous day! Callooh! Callay!'\n  He chortled in his joy.\n\n\n`Twas brillig, and the slithy toves\n  Did gyre and gimble in the wabe;\nAll mimsy were the borogoves,\n  And the mome raths outgrabe. "
+
+
 
 ;; Problem Set 14:
 ;; - Write a function that reads THIS file and writes a file containing only the lines that

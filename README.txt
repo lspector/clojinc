@@ -4,8 +4,8 @@ When it refers to "this file" it is referring to that file.
 
 ;; clojinc
 ;; Steps toward clojure, starting from zero.
-;; by Lee Spector <lspector@hampshire.edu>, 2011
-;; Version (date): 20110906
+;; by Lee Spector <lspector@hampshire.edu>, 2011-2012
+;; Version (date): 20120825
 
 ;; This file is a saved, re-executable Clojure REPL (Read Eval Print Loop) 
 ;; session, with minimal comments and occasional problem sets. It is intended
@@ -50,17 +50,16 @@ When it refers to "this file" it is referring to that file.
 ;; Potentially useful online resources include:
 
 ;; http://clojure.org
+;; http://dev.clojure.org/display/doc/Getting+Started
 ;; http://groups.google.com/group/clojure
-;; http://richhickey.github.com/clojure/
 ;; http://4clojure.com
 ;; http://clojuredocs.org
 ;; http://www.clojure-toolbox.com
-;; http://clojuresphere.herokuapp.com/
 ;; http://www.clojureatlas.com
 ;; http://alexott.net/en/clojure/video.html
 ;; http://planet.clojure.in/
 
-;; This file was created in the free clooj Clojure IDE, which is available from: 
-;;   https://github.com/arthuredelstein/clooj
-;; It was created using clojure version 1.2.1 and clojure-contrib (a standard set 
-;; of Clojure libraries) version 1.2.0.
+;; Most of the outputs in clojinc were created using clojure version 1.3 in a
+;; REPL started with Leiningen 1.7.1 (https://github.com/technomancy/leiningen)
+;; and using Java 1.6.0_33. (A few were left from an earlier version, for which
+;; Clooj (https://github.com/arthuredelstein/clooj) was used.
