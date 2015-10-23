@@ -1995,9 +1995,9 @@ X
 (defn print-twins
   [[this that]] 
   (println "the first twin is" 
-           (read-string (name this))
+           (name this)
            "and the other is" 
-           (read-string (name that)))) 
+           (name that)))
 
 ; #'clojinc.core/print-twins
 
