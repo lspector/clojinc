@@ -1,7 +1,7 @@
 ;; clojinc
 ;; Steps toward clojure, starting from zero.
-;; by Lee Spector <lspector@hampshire.edu>, 2011-2012
-;; Version (date): 20120825
+;; by Lee Spector <lspector@hampshire.edu>, 2011-2017
+;; Version (date): 20170914
 
 ;; This file is a saved, re-executable Clojure REPL (Read Eval Print Loop) 
 ;; session, with minimal comments and occasional problem sets. It is intended
@@ -456,7 +456,7 @@ some other stuff."
 
 (def y 5)
 
-; (def y 5)
+; #'clojinc.core/y
 
 
 
@@ -2745,5 +2745,6 @@ teens
 
 ;; That's it! Now you should be ready to do more interesting things of your own design in 
 ;; Clojure.
+
 
 
