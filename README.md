@@ -4,6 +4,7 @@ When it refers to "this file" it is referring to that file.
 
 The same content is also available in the form of a [Gorilla REPL](http://gorilla-repl.org) worksheet, in `worksheet.clj`. The worksheet can also be viewed [here](http://viewer.gorilla-repl.org/view.html?source=github&user=lspector&clojinc=<>&path=blob/master/worksheet.clj).
 
+```
 ;; clojinc
 ;; Steps toward clojure, starting from zero.
 ;; by Lee Spector <lspector@hampshire.edu>, 2011-2017
@@ -65,3 +66,4 @@ The same content is also available in the form of a [Gorilla REPL](http://gorill
 ;; REPL started with Leiningen 1.7.1 (https://github.com/technomancy/leiningen)
 ;; and using Java 1.6.0_33. (A few were left from an earlier version, for which
 ;; Clooj (https://github.com/arthuredelstein/clooj) was used.
+```
