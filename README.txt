@@ -2,6 +2,8 @@
 The text below is the comment from the top of src/clojinc/core.clj.
 When it refers to "this file" it is referring to that file.
 
+The same content is also available in the form of a [Gorilla REPL](http://gorilla-repl.org) worksheet, in `worksheet.clj`. The worksheet can also be viewed [here](http://viewer.gorilla-repl.org/view.html?source=github&user=lspector&clojinc=<>&path=blob/master/worksheet.clj).
+
 ;; clojinc
 ;; Steps toward clojure, starting from zero.
 ;; by Lee Spector <lspector@hampshire.edu>, 2011-2017
