@@ -1735,7 +1735,7 @@ eddie
 ;;    :nationality "French"
 ;;    :genre "Psychedelia"
 ;;    :duration {:minutes 2, :seconds 28}
-;;    :url "https://www.youtube.com/watch?v=37aJwPTVkj8"}
+;;    :url "https://www.youtube.com/watch?v=afdCUJWkoNs"}
 ;; - Write a function that returns a playlist for a particular genre.
 ;; - ... for a set of genres.
 ;; - ... for a particular length of time.
