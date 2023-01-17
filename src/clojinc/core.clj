@@ -46,13 +46,12 @@
 ;; Potentially useful online resources include:
 
 ;; http://clojure.org
-;; http://dev.clojure.org/display/doc/Getting+Started
+;; https://clojure.org/guides/getting_started
 ;; http://groups.google.com/group/clojure
-;; http://4clojure.com
+;; https://4clojure.oxal.org
 ;; http://clojuredocs.org
 ;; http://www.clojure-toolbox.com
-;; http://www.clojureatlas.com
-;; http://alexott.net/en/clojure/video.html
+;; https://www.youtube.com/channel/UCaLlzGqiPE2QRj6sSOawJRg
 ;; http://planet.clojure.in/
 
 ;; Most of the outputs in clojinc were created using clojure version 1.3 in a
